@@ -80,7 +80,8 @@ export default function Login({ onLoginSuccess }) {
       const data = await response.json();
 
       if (data.success) {
-        onLoginSuccess(); // Deschidem aplicația!
+        // AICI ESTE MODIFICAREA IMPORTANTĂ: Trimitem userId-ul părintelui (App.jsx)
+        onLoginSuccess(userId); 
       } else {
         setEroare('Cod SMS incorect!');
       }

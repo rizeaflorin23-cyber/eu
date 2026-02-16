@@ -3,14 +3,18 @@ import Login from './Login';
 import BankingApp from './BankingApp'; 
 
 export default function App() {
-  // Stare care ne spune dacă utilizatorul s-a logat cu succes
-  const [esteLogat, setEsteLogat] = useState(false);
+  // Stocăm ID-ul utilizatorului logat (null = nelogat)
+  const [userId, setUserId] = useState(null);
 
-  // Dacă NU este logat, afișăm ecranul de Login
-  if (!esteLogat) {
-    return <Login onLoginSuccess={() => setEsteLogat(true)} />;
+  // Dacă NU avem un userId, afișăm ecranul de Login
+  if (!userId) {
+    return (
+      <Login 
+        onLoginSuccess={(id) => setUserId(id)} 
+      />
+    );
   }
 
-  // Dacă ESTE logat, afișăm aplicația bancară efectivă
-  return <BankingApp />;
+  // Dacă AVEM userId, afișăm aplicația bancară și îi trimitem ID-ul
+  return <BankingApp userId={userId} />;
 }
